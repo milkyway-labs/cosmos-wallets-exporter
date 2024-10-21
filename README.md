@@ -12,6 +12,31 @@ If you have a wallet that does transactions on an app's behalf without your inte
 
 ## How can I set it up?
 
+### Using Docker
+
+The easiest and fastest way to set up the exporter is to use Docker. You can use the following command to run the exporter:
+
+```sh
+docker run -p 9550:9550 -v /path/to/config.toml:/config.toml quokkastake/cosmos-wallets-exporter --config /config.toml
+```
+
+You can also use it with docker-compose:
+
+```yaml
+services:
+  cosmos-wallets-exporter:
+    image: quokkastake/cosmos-wallets-exporter
+    container_name: cosmos-wallets-exporter
+    restart: unless-stopped
+    command: --config /config.toml
+    volumes:
+      - /path/to/config.toml:/config.toml
+    ports:
+      - 9550:9550
+```
+
+### As a system daemon
+
 First, you need to download the latest release from [the releases page](https://github.com/QuokkaStake/cosmos-wallets-exporter/releases/). After that, you should unzip it, and you are ready to go:
 
 ```sh
